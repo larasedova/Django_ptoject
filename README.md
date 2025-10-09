@@ -245,4 +245,4 @@ python manage.py runserver 8001
 
 **Автор**: Larisa Sedova  
 **Проект**: Django Todo Application  
-**Дата**: Октябрь 2024
+**Дата**: Октябрь 2025

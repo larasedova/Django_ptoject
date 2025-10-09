@@ -1,0 +1,32 @@
+[
+  {
+    "model": "todo.task",
+    "pk": 1,
+    "fields": {
+      "title": "Изучить Django ORM",
+      "description": "Изучить основы работы с ORM в Django, включая создание, чтение, обновление и удаление записей",
+      "completed": true,
+      "created_at": "2025-10-09T06:45:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 2,
+    "fields": {
+      "title": "Создать todo приложение",
+      "description": "Разработать полнофункциональное приложение для управления задачами",
+      "completed": false,
+      "created_at": "2025-10-09T06:45:01Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 3,
+    "fields": {
+      "title": "Написать тесты",
+      "description": "Создать unit-тесты для проверки функциональности приложения",
+      "completed": false,
+      "created_at": "2025-10-09T06:45:02Z"
+    }
+  }
+]
