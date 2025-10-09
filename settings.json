@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "./django_env/Scripts/python.exe",
+    "python.analysis.extraPaths": [
+        "./django_project"
+    ]
+}
