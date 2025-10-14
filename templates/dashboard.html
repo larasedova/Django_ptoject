@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Панель управления</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .welcome { background: #e9ecef; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+        .nav { margin: 20px 0; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #007bff; }
+        .logout-form { display: inline; }
+        .logout-btn { background: none; border: none; color: #007bff; cursor: pointer; text-decoration: underline; font-size: inherit; }
+    </style>
+</head>
+<body>
+    <div class="welcome">
+        <h2>Добро пожаловать, {{ user.username }}!</h2>
+        <p>Вы успешно вошли в систему.</p>
+    </div>
+
+    <div class="nav">
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'todo:index' %}">Приложение Todo</a>
+        <!-- Используем форму для выхода -->
+        <form method="post" action="{% url 'accounts:logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Выйти</button>
+        </form>
+    </div>
+
+    <h3>Защищенная страница</h3>
+    <p>Эта страница доступна только авторизованным пользователям.</p>
+</body>
+</html>
