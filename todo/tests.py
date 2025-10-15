@@ -1,10 +1,9 @@
 from django.test import TestCase
-from django.utils import timezone
+from django.contrib.auth.models import User
 from .models import Task
 
 
 class TaskModelTest(TestCase):
-
     def setUp(self):
         """Создаем тестовые данные"""
         self.task = Task.objects.create(
@@ -38,7 +37,6 @@ class TaskModelTest(TestCase):
 
 
 class TaskCRUDTest(TestCase):
-
     def test_create_task(self):
         """Тест создания задачи через ORM"""
         task = Task.objects.create(
@@ -92,22 +90,42 @@ class TaskCRUDTest(TestCase):
 
 
 class TaskViewsTest(TestCase):
+    def setUp(self):
+        """Создаем тестового пользователя"""
+        self.user = User.objects.create_user(
+            username="testuser", password="testpassword123"
+        )
 
-    def test_todo_index_view(self):
-        """Тест главной страницы приложения todo"""
+    def test_todo_index_view_redirects_when_not_authenticated(self):
+        """Тест редиректа на страницу входа для неавторизованных пользователей"""
         from django.test import Client
         from django.urls import reverse
 
         client = Client()
-        response = client.get(reverse("index"))
+        response = client.get(reverse("todo:index"))
 
+        # Должен быть редирект на страницу входа (302)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login/", response.url)
+
+    def test_todo_index_view_accessible_when_authenticated(self):
+        """Тест доступа к странице todo для авторизованных пользователей"""
+        from django.test import Client
+        from django.urls import reverse
+
+        client = Client()
+        # Авторизуем пользователя
+        client.login(username="testuser", password="testpassword123")
+
+        response = client.get(reverse("todo:index"))
+
+        # Теперь должен быть успешный доступ (200)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Приложение Todo")
 
     def test_admin_access(self):
         """Тест доступа к админке"""
         from django.test import Client
-        from django.urls import reverse
 
         client = Client()
         response = client.get("/admin/")

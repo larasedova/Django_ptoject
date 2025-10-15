@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
 def index(request):
+    csrf_token = request.META.get("CSRF_COOKIE", "")
     return HttpResponse(
         f"""
     <!DOCTYPE html>
@@ -25,17 +25,17 @@ def index(request):
             <h1>🚀 Приложение Todo</h1>
             <p>Добро пожаловать, <strong>{request.user.username}</strong>!</p>
         </div>
-        
+
         <div class="nav">
             <a href="/">Главная</a>
             <a href="/accounts/dashboard/">Панель управления</a>
             <!-- Используем форму для выхода -->
             <form method="post" action="/accounts/logout/" class="logout-form">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{request.META['CSRF_COOKIE']}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{csrf_token}">
                 <button type="submit" class="logout-btn">Выйти</button>
             </form>
         </div>
-        
+
         <h2>Ваши задачи:</h2>
         <p>Здесь будет список ваших задач...</p>
     </body>

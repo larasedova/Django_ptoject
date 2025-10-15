@@ -153,10 +153,10 @@ else:
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Настройки для статических файлов в development
-if DEBUG:
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]
+# if DEBUG:
+#    STATICFILES_DIRS = [
+#        BASE_DIR / "static",
+#    ]
 
 # Логирование
 LOGGING = {
