@@ -253,3 +253,4 @@ refactor: - рефакторинг кода
 **Автор**: Larisa Sedova  
 **Проект**: Django Todo Application  
 **Дата**: Октябрь 2025
+# CI test 
